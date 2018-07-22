@@ -15,6 +15,7 @@ export const logout = (dispatch,data) => {
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('username');
         localStorage.removeItem('email');
+        localStorage.removeItem('isAdmin');
         localStorage.removeItem('access_token');
         dispatch({type: 'LOGOUT_SUCCESS', data: {Message}});
         swal(Message);

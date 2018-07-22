@@ -5,14 +5,15 @@ import {
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
     REGISTER_FAIL
-} from '../actions/constants'
+} from '../actions/constants';
 
 const initialState = {
     Message: '',
-    loggedIn: localStorage.getItem('loggedIn'),
+    loggedIn: JSON.parse(localStorage.getItem('loggedIn')),
     username: localStorage.getItem('username'),
     access_token: localStorage.getItem('access_token'),
     email: localStorage.getItem('email'),
+    isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
     error: null
 }
 export default (state = initialState, action) => {
@@ -24,6 +25,7 @@ export default (state = initialState, action) => {
                 access_token: action.data.access_token,
                 username: action.data.username,
                 email: action.data.email,
+                isAdmin: action.data.isAdmin,
                 Message: 'Logged in successfully'
             }
         case LOGIN_FAIL:
@@ -40,6 +42,7 @@ export default (state = initialState, action) => {
                 access_token: null,
                 username: null,
                 email: null,
+                isAdmin: null,
                 loggedIn: false,
                 error: null
             }
