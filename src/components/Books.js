@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import swal from 'sweetalert';
-import {connect} from 'react-redux'
-import {api_url} from './../config'
-import { Table } from 'reactstrap';
+import { connect } from 'react-redux';
+import { CardDeck } from 'reactstrap';
 import Book from './Book';
+import { getAllBooks } from '../actions/Books';
 
 class Books extends Component {
     constructor() {
@@ -13,19 +11,11 @@ class Books extends Component {
     }
 
     componentDidMount() {
-        axios.get(api_url + 'books', {
-        }).then(books => {
-            this.setState({ books: books.data.books })
-        }).catch(error => {
-            if (error.response.status === 204) {
-                const message = error.response.data.Message;
-                swal("Error!!", message, "error");
-            }
-        });
+        this.props.getAllBooks()
     }
 
     render() {
-        let book = this.state.books.map(book => {
+        let book = this.props.books.books.map(book => {
             return (
                 <Book key={book.book_id} book={book} />
             );
@@ -34,31 +24,24 @@ class Books extends Component {
         return (
             <div id='books'>
                 <div><br />
-                    <h4 >Books Available</h4><br />
+                    <h4>Books Available</h4>
+                    <hr />
                 </div>
-                <Table id='bookstable' responsive hover>
-                    <thead>
-                        <tr style={{ backgroundColor:'#ddd' }}>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Edition</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
+                <CardDeck>
                     {book}
-                </Table>
+                </CardDeck>
             </div>
         );
-    }   
+    }
 }
 const mapStateToProps = (state) => {
-    // console.log(state);
     return {
-        login : state.login
+        auth: state.auth,
+        books: state.books
     }
 }
 const mapDispatchToProps = (dispatch) => ({
-    // login: () => dispatch({type: 'LOGIN_SUCCESS', data: data})
+    getAllBooks: (data) => getAllBooks(dispatch, data)
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Books);
+export default connect(mapStateToProps, mapDispatchToProps)(Books);

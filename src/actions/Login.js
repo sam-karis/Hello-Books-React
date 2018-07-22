@@ -13,13 +13,15 @@ export const login = (dispatch, data) => {
         const access_token = res.data.access_token;
         const username = res.data.username;
         const email = res.data.email;
-        localStorage.setItem('email', email)
-        localStorage.setItem('username', username)
-        localStorage.setItem('access_token', access_token)
+        const isAdmin = res.data.is_admin;
+        localStorage.setItem('email', email);
+        localStorage.setItem('username', username);
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('isAdmin', isAdmin);
         localStorage.setItem('loggedIn', true);
         dispatch({
             type: 'LOGIN_SUCCESS', data: {
-                access_token, username, email,
+                access_token, username, email, isAdmin
             }
         })
         browserHistory.push('/books')

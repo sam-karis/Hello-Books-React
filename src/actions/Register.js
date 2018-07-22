@@ -19,7 +19,6 @@ export const register = (dispatch,data) => {
         swal(res.data.Message);
         browserHistory.push('/login')
     }).catch(error => {
-        console.log(error.response)
         if (error.response.status === 406) {
             const Message = error.response.data.Message;
             dispatch({type: 'REGISTER_FAIL', data: {Message}});

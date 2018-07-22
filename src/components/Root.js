@@ -5,9 +5,15 @@ import Footer from './Footer';
 class Root extends Component {
     render() {
         return (
-            <div>
-                <Header />
-                {this.props.children}
+            <div className="App Site">
+                <div className="Site-content">
+                    <div className="App-header">
+                        <Header />
+                    </div>
+                    <div className="main-content">
+                        {this.props.children}
+                    </div>
+                </div>
                 <Footer />
             </div>
 

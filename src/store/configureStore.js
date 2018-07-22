@@ -1,12 +1,6 @@
 import { createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk'
-import reducers from '../reducers'
-// applyMiddleware supercharges createStore with middleware:
-// export const store = createStore(
-//     reducer,
-//     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-//     applyMiddleware(thunk)
-// )
+import thunk from 'redux-thunk';
+import reducers from '../reducers';
 
 const configureStore = () => {
     // create store...
