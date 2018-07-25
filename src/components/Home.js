@@ -5,17 +5,17 @@ class Home extends Component {
     super();
     this.state = {
       loggedIn: true
-    }
+    };
   }
-  _handleClick = () => (this.setState({
-    loggedIn: !this.state.loggedIn
-  }));
+  _handleClick = () =>
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    });
 
   render() {
     return (
-      <div id='homecontent'>
-        
-          <section id="section"> Welcome to hello books</section>
+      <div id="homecontent">
+        <section id="section"> Welcome to hello books</section>
       </div>
     );
   }
