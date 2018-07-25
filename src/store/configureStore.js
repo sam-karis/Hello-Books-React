@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import reducers from '../reducers';
 
 const configureStore = () => {
-    // create store...
-    const middleware = [thunk];
-    const store = compose(applyMiddleware(...middleware))(createStore)(
-      reducers,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    );
-    return store;
+  // create store...
+  const middleware = [thunk];
+  const store = compose(applyMiddleware(...middleware))(createStore)(
+    reducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  );
+  return store;
 };
-export const store = configureStore()
+export const store = configureStore();
