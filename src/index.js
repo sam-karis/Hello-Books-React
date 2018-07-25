@@ -10,7 +10,6 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Books from './components/Books';
 import SingleBook from './components/SingleBook';
-import Auth from './components/Auth';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store/configureStore';
 
@@ -26,7 +25,6 @@ class App extends React.Component {
             <Route path="register" component={Register} />
             <Route path="books" component={Books} />
             <Route path="books/:id" component={SingleBook} />
-            <Route path="auth" component={Auth} />
           </Route>
         </Router>
       </Provider>
