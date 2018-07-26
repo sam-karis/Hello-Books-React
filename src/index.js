@@ -9,6 +9,7 @@ import Root from './components/Root';
 import Login from './components/Login';
 import Register from './components/Register';
 import Books from './components/Books';
+import AddEditForm from './components/AddEditForm';
 import SingleBook from './components/SingleBook';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store/configureStore';
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Route path="register" component={Register} />
             <Route path="books" component={Books} />
             <Route path="books/:id" component={SingleBook} />
+            <Route path="add" component={AddEditForm} />
           </Route>
         </Router>
       </Provider>
