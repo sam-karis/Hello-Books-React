@@ -4,78 +4,98 @@ body {
   font-family: sans-serif;
 }
 
-.loginform, .regform{
+.loginform,
+.regform,
+.addEditForm {
   width: 40%;
   margin: auto;
   border: 1px solid #eee;
   border-radius: 15px;
   padding: 20px;
   margin-top: 30px;
-  box-shadow: 2px 4px #ddd
+  box-shadow: 2px 4px #ddd;
 }
 
 input[type='text'],
 input[type='email'],
-input[type='password']{
-  background: #f1f1f1
+input[type='password'] {
+  background: #f1f1f1;
 }
 
 #submit {
   float: right;
 }
 #section {
-  padding: 20%  0 0 10%;
+  padding: 20% 0 0 10%;
 }
 
 #homecontent {
-background-image: url('../images/home-bg.jpg');
-background-size: 100% 100%;
-height:600px !important;
-
+  background-image: url('../images/home-bg.jpg');
+  background-size: 100% 100%;
+  height: 600px !important;
 }
 
+#drop {
+  background-color: #7c6e6e !important;
+  width: 120px;
+  padding-left: 20px;
+}
 #root {
   background-image: url('../images/content-bg.png');
   background-size: 100% 100%;
-  height:100% !important;
-  
-  }
+  height: 100% !important;
+}
 
 #header {
   /* background-image: url('../images/header-bg.png'); */
   /* background-size: 100% 100%; */
-  height:68px !important;
+  height: 68px !important;
   background-color: #7c6e6e !important;
-  }
+  z-index: 10;
+}
 
-  #books {
-    width: 80%;
-    margin: auto;
-  }
+#books {
+  width: 80%;
+  margin: auto;
+}
 
-  h4 {
-    text-align: center;
-    }
+h4 {
+  text-align: center;
+}
 
-    .Site {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-  }
-  
-  .Site-content {
-      flex: 1 0 auto;
-      padding: var(--space) var(--space) 0;
-      width: 100%;
-  }
+.Site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-.card-body{
+.Site-content {
+  flex: 1 0 auto;
+  padding: var(--space) var(--space) 0;
+  width: 100%;
+}
+
+.card-body {
   background-color: #f5f8fa;
 }
-.action{
+.action {
   float: right;
 }
 
-.bookHeader{
+.bookHeader {
   float: left;
+}
+
+#addBookbtn {
+  border-radius: 20%;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.8;
+}
+
+#bookCard {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
