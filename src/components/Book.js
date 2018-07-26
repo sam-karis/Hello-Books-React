@@ -6,26 +6,28 @@ import { getSingleBook } from '../actions/Books';
 import PropTypes from 'prop-types';
 
 class Book extends Component {
-  _getSingleBook = ()=> {
+  _getSingleBook = () => {
     const book_id = this.props.params.id;
     this.props.getSingleBook(book_id);
   };
   render() {
     return (
-      <Card body outline color="info">
-        <CardTitle>{this.props.book.Title} </CardTitle>
-        <CardBody>
-          <CardText>Status : {this.props.book.status}</CardText>
-        </CardBody>
-        <CardFooter>Authored by : {this.props.book.author}</CardFooter>
-        <Link
-          to={`books/${this.props.book.book_id}`}
-          className="btn btn-success"
-          role="button"
-        >
-          View Details
-        </Link>
-      </Card>
+      <div className="col-lg-3 col-sm-6 col-md-4" id='bookCard'>
+        <Card body outline color="info">
+          <CardTitle>{this.props.book.Title} </CardTitle>
+          <CardBody>
+            <CardText>Status : {this.props.book.status}</CardText>
+          </CardBody>
+          <CardFooter>Authored by : {this.props.book.author}</CardFooter>
+          <Link
+            to={`books/${this.props.book.book_id}`}
+            className="btn btn-success"
+            role="button"
+          >
+            View Details
+          </Link>
+        </Card>
+      </div>
     );
   }
 }

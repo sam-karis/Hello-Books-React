@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { CardDeck } from 'reactstrap';
+import { Link } from 'react-router';
 import Book from './Book';
 import { getAllBooks } from '../actions/Books';
 import PropTypes from 'prop-types';
@@ -8,12 +8,20 @@ import PropTypes from 'prop-types';
 class Books extends Component {
   constructor() {
     super();
-    this.state = { books: [] };
+    this.state = {
+      modal: false
+    };
   }
 
   componentDidMount() {
     this.props.getAllBooks();
   }
+
+  _toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
 
   render() {
     let book = this.props.books.books.map(book => {
@@ -27,7 +35,20 @@ class Books extends Component {
           <h4>Books Available</h4>
           <hr />
         </div>
-        <CardDeck>{book}</CardDeck>
+
+        <div className="row">{book}</div>
+
+        {this.props.auth.isAdmin ? (
+          <Link
+            id="addBookbtn"
+            onClick={this._toggle}
+            to={'/add'}
+            className="btn btn-success"
+            role="button"
+          >
+            Add Book
+          </Link>
+        ) : null}
       </div>
     );
   }
@@ -44,6 +65,7 @@ const mapDispatchToProps = dispatch => ({
 
 Books.propTypes = {
   books: PropTypes.object,
+  auth: PropTypes.object,
   getAllBooks: PropTypes.func
 };
 

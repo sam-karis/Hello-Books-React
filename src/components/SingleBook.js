@@ -118,7 +118,7 @@ const mapDispatchToProps = dispatch => ({
 SingleBook.propTypes = {
   book: PropTypes.object,
   auth: PropTypes.object,
-  params: PropTypes.number,
+  params: PropTypes.object,
   getSingleBook: PropTypes.func
 };
 

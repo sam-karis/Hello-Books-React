@@ -46,24 +46,24 @@ class Header extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to="/books" className="nav-link">
+                <Link to="/books" id="drop" className="nav-link">
                   Books
                 </Link>
               </NavItem>
               <NavItem>
-                <Link to="/auth" className="nav-link">
+                <Link to="/" id="drop" className="nav-link">
                   About Us
                 </Link>
               </NavItem>
               {!this.props.auth.loggedIn ? (
                 <Fragment>
                   <NavItem>
-                    <Link to="/register" className="nav-link">
+                    <Link to="/register" id="drop" className="nav-link">
                       Sign Up
                     </Link>
                   </NavItem>
                   <NavItem>
-                    <Link to="/login" className="nav-link">
+                    <Link to="/login" id="drop" className="nav-link">
                       Login
                     </Link>
                   </NavItem>
@@ -71,12 +71,12 @@ class Header extends Component {
               ) : (
                 <Fragment>
                   <NavItem>
-                    <Link to="/books" className="nav-link">
+                    <Link to="/books" id="drop" className="nav-link">
                       History
                     </Link>
                   </NavItem>
                   <UncontrolledDropdown>
-                    <DropdownToggle nav caret>
+                    <DropdownToggle id="drop" nav caret>
                       {this.props.auth.username}
                     </DropdownToggle>
                     <DropdownMenu>
@@ -93,7 +93,6 @@ class Header extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
     auth: state.auth
@@ -103,10 +102,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   logout: data => logout(dispatch, data)
 });
+
 Header.propTypes = {
   auth: PropTypes.object,
   logout: PropTypes.func
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
