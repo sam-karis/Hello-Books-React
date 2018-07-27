@@ -1,4 +1,9 @@
-import { ADD_BOOK_SUCCESS, ADD_BOOK_FAIL } from '../actions/constants';
+import {
+  ADD_BOOK_SUCCESS,
+  ADD_BOOK_FAIL,
+  DELETE_BOOK_SUCCESS,
+  DELETE_BOOK_FAIL
+} from '../actions/constants';
 
 const initialState = {
   Message: '',
@@ -12,6 +17,16 @@ export default (state = initialState, action) => {
         Message: action.data.Message
       };
     case ADD_BOOK_FAIL:
+      return {
+        ...state,
+        Message: action.data.Message
+      };
+    case DELETE_BOOK_SUCCESS:
+      return {
+        ...state,
+        Message: action.data.Message
+      };
+    case DELETE_BOOK_FAIL:
       return {
         ...state,
         Message: action.data.Message
