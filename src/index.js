@@ -11,6 +11,7 @@ import Register from './components/Register';
 import Books from './components/Books';
 import AddEditForm from './components/AddEditForm';
 import SingleBook from './components/SingleBook';
+import BorrowHistory from './components/BorrowHistory';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store/configureStore';
 
@@ -27,6 +28,7 @@ class App extends React.Component {
             <Route path="books" component={Books} />
             <Route path="books/:id" component={SingleBook} />
             <Route path="add" component={AddEditForm} />
+            <Route path="userhistory" component={BorrowHistory} />
           </Route>
         </Router>
       </Provider>
