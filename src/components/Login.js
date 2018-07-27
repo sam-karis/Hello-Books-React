@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import { login } from '../actions/Login';
 import PropTypes from 'prop-types';
@@ -10,6 +11,11 @@ class Login extends Component {
     this.state = {
       visible: true
     };
+  }
+  componentDidMount() {
+    if (this.props.auth.loggedIn) {
+      browserHistory.push('/books');
+    }
   }
 
   _onDismiss = () => {

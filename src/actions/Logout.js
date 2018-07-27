@@ -3,6 +3,14 @@ import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import { api_url, request_header } from './../config';
 
+const clearUser = () => {
+  localStorage.removeItem('loggedIn');
+  localStorage.removeItem('username');
+  localStorage.removeItem('email');
+  localStorage.removeItem('isAdmin');
+  localStorage.removeItem('access_token');
+};
+
 export const logout = (dispatch, data) => {
   const logout_url = `${api_url}auth/logout`;
   axios
@@ -13,17 +21,14 @@ export const logout = (dispatch, data) => {
     )
     .then(res => {
       const Message = res.data.Message;
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('username');
-      localStorage.removeItem('email');
-      localStorage.removeItem('isAdmin');
-      localStorage.removeItem('access_token');
+      clearUser();
       dispatch({ type: 'LOGOUT_SUCCESS', data: { Message } });
       swal(Message);
       browserHistory.push('/login');
     })
     .catch(() => {
       dispatch({ type: 'LOGOUT_SUCCESS' });
+      clearUser();
       browserHistory.push('/login');
     });
 };
