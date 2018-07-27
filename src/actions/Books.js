@@ -4,7 +4,7 @@ import { api_url } from './../config';
 
 const getAllBooks = dispatch => {
   const all_books_url = `${api_url}books`;
-  axios
+  return axios
     .get(all_books_url)
     .then(res => {
       const books = res.data.books;
@@ -18,24 +18,26 @@ const getAllBooks = dispatch => {
     });
 };
 
-const getSingleBook = (dispatch, id) => {
+const getSingleBook = id => {
   const single_book_url = `${api_url}books/${id}`;
-  axios
-    .get(single_book_url)
-    .then(res => {
-      const book = res.data;
-      if (res.data.status === 204) {
-        const Message = res.data.Message;
-        return dispatch({ type: 'GET_ONE_BOOK_FAIL', data: Message });
-      }
-      dispatch({ type: 'GET_ONE_BOOK_SUCCESS', data: book });
-    })
-    .catch(error => {
-      if (error.response.status === 404) {
-        const Message = error.response.data.Message;
-        return dispatch({ type: 'GET_ONE_BOOK_FAIL', data: Message });
-      }
-    });
+  return dispatch => {
+    return axios
+      .get(single_book_url)
+      .then(res => {
+        const book = res.data;
+        if (res.data.status === 204) {
+          const Message = res.data.Message;
+          return dispatch({ type: 'GET_ONE_BOOK_FAIL', data: Message });
+        }
+        dispatch({ type: 'GET_ONE_BOOK_SUCCESS', data: book });
+      })
+      .catch(error => {
+        if (error.response.status === 404) {
+          const Message = error.response.data.Message;
+          return dispatch({ type: 'GET_ONE_BOOK_FAIL', data: Message });
+        }
+      });
+  };
 };
 
 export { getAllBooks, getSingleBook };
