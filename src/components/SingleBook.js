@@ -14,6 +14,7 @@ import {
 } from 'reactstrap';
 import { getSingleBook } from '../actions/Books';
 import PropTypes from 'prop-types';
+import { deleteBook } from '../actions/Admin';
 
 class SingleBook extends Component {
   constructor(props) {
@@ -35,6 +36,13 @@ class SingleBook extends Component {
     const book_id = this.props.params.id;
     this.props.getSingleBook(book_id);
   };
+
+  _deleteBook = () => {
+    const access_token = this.props.auth.access_token;
+    const book_id = this.props.params.id;
+    this.props.deleteBook({ access_token, book_id });
+  };
+
   componentDidMount() {
     this._getSingleBook();
     if (this.props.book.book.status === 'Borrowed') {
@@ -72,7 +80,9 @@ class SingleBook extends Component {
                         <DropdownItem divider />
                         <DropdownItem header>Admin</DropdownItem>
                         <DropdownItem>Edit</DropdownItem>
-                        <DropdownItem>Delete</DropdownItem>
+                        <DropdownItem onClick={this._deleteBook}>
+                          Delete
+                        </DropdownItem>
                       </div>
                     ) : null}
                   </DropdownMenu>
@@ -111,15 +121,18 @@ const mapStateToProps = state => {
     book: state.book
   };
 };
+
 const mapDispatchToProps = dispatch => ({
-  getSingleBook: id => getSingleBook(dispatch, id)
+  getSingleBook: id => dispatch(getSingleBook(id)),
+  deleteBook: id => dispatch(deleteBook(id))
 });
 
 SingleBook.propTypes = {
   book: PropTypes.object,
   auth: PropTypes.object,
   params: PropTypes.object,
-  getSingleBook: PropTypes.func
+  getSingleBook: PropTypes.func,
+  deleteBook: PropTypes.func
 };
 
 export default connect(

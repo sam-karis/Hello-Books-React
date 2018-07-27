@@ -28,3 +28,29 @@ export const addBook = (dispatch, data) => {
       swal('NOT ACCEPTABLE', Message, 'error');
     });
 };
+
+export const deleteBook = (data) => {
+  return dispatch => {
+    const delete_book_url = `${api_url}books/${data.book_id}`;
+    axios
+      .delete(delete_book_url, { headers: request_header(data.access_token) })
+      .then(res => {
+        const Message = res.data.Message;
+        if (res.data.status === 204) {
+          const Message = res.data.Message;
+          return dispatch({ type: 'DELETE_BOOK_SUCCESS', data: { Message } });
+        }
+        dispatch({ type: 'DELETE_BOOK_SUCCESS', data: { Message } });
+        swal(Message);
+        browserHistory.push('/books');
+      })
+      .catch(error => {
+        const Message = 'Your session has expired login to continue!';
+        if (error.response.status === 404) {
+          dispatch({ type: 'DELETE_BOOK_FAIL', data: { Message } });
+          browserHistory.push('login');
+        }
+        swal('NOT ACCEPTABLE', Message, 'error');
+      });
+  };
+};
