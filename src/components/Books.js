@@ -6,22 +6,10 @@ import { getAllBooks } from '../actions/Books';
 import PropTypes from 'prop-types';
 
 class Books extends Component {
-  constructor() {
-    super();
-    this.state = {
-      modal: false
-    };
-  }
 
   componentDidMount() {
     this.props.getAllBooks();
   }
-
-  _toggle = () => {
-    this.setState({
-      modal: !this.state.modal
-    });
-  };
 
   render() {
     let book = this.props.books.books.map(book => {
@@ -41,7 +29,6 @@ class Books extends Component {
         {this.props.auth.isAdmin ? (
           <Link
             id="addBookbtn"
-            onClick={this._toggle}
             to={'/add'}
             className="btn btn-success"
             role="button"
