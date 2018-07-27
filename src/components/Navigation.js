@@ -71,7 +71,7 @@ class Header extends Component {
               ) : (
                 <Fragment>
                   <NavItem>
-                    <Link to="/books" id="drop" className="nav-link">
+                    <Link to="/userhistory" id="drop" className="nav-link">
                       History
                     </Link>
                   </NavItem>
