@@ -102,7 +102,7 @@ class SingleBook extends Component {
                       <div className="admin">
                         <DropdownItem divider />
                         <DropdownItem header>Admin</DropdownItem>
-                        <DropdownItem>Edit</DropdownItem>
+                        <DropdownItem tag={Link} to={`/edit/${book.book_id}`}>Edit</DropdownItem>
                         <DropdownItem onClick={this._deleteBook}>
                           Delete
                         </DropdownItem>
