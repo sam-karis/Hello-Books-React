@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { api_url, request_header } from './../config';
+import swal from 'sweetalert';
+import { browserHistory } from 'react-router';
+import { api_url, request_header} from './../config';
 
 export const getBorrowHistory = data => {
   return dispatch => {
@@ -14,9 +16,12 @@ export const getBorrowHistory = data => {
         const history = res.data.books;
         dispatch({ type: 'BORROW_HISTORY_SUCCESS', data: history });
       })
-      .catch(() => {
-        const Message = 'No history';
-        dispatch({ type: 'BORROW_HISTORY_FAIL', data: { Message } });
+      .catch(error => {
+        if (error.response.status === 401) {
+          const Message = 'session expired login to continue';
+          swal(Message);
+          browserHistory.push('/login');
+        }
       });
   };
 };

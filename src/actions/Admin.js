@@ -2,6 +2,7 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import { api_url, request_header } from './../config';
+import { logout } from '../actions/Logout';
 
 export const addBook = (dispatch, data) => {
   const add_book_url = `${api_url}books`;
@@ -29,10 +30,10 @@ export const addBook = (dispatch, data) => {
     });
 };
 
-export const deleteBook = (data) => {
+export const deleteBook = data => {
   return dispatch => {
     const delete_book_url = `${api_url}books/${data.book_id}`;
-    axios
+    return axios
       .delete(delete_book_url, { headers: request_header(data.access_token) })
       .then(res => {
         const Message = res.data.Message;
@@ -45,12 +46,13 @@ export const deleteBook = (data) => {
         browserHistory.push('/books');
       })
       .catch(error => {
-        const Message = 'Your session has expired login to continue!';
-        if (error.response.status === 404) {
-          dispatch({ type: 'DELETE_BOOK_FAIL', data: { Message } });
-          browserHistory.push('login');
+        if (error.response.status === 401) {
+          const Message = 'session expired login to continue';
+          swal(Message);
+          dispatch(
+            logout({ email: data.email, access_token: data.access_token })
+          );
         }
-        swal('NOT ACCEPTABLE', Message, 'error');
       });
   };
 };

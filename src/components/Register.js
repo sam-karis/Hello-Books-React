@@ -105,7 +105,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  register: data => register(dispatch, data)
+  register: data => dispatch(register( data))
 });
 
 Register.propTypes = {

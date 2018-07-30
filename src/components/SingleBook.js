@@ -15,14 +15,15 @@ import {
 import { getSingleBook } from '../actions/Books';
 import PropTypes from 'prop-types';
 import { deleteBook } from '../actions/Admin';
+import { borrowBook } from '../actions/User';
+import { returnBook } from '../actions/User';
 
 class SingleBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dropdownOpen: false,
-      borrowedStatus: false,
-      returnedStatus: true
+      borrowedStatus: false
     };
   }
 
@@ -43,19 +44,35 @@ class SingleBook extends Component {
     this.props.deleteBook({ access_token, book_id });
   };
 
+  _borrowBook = () => {
+    const access_token = this.props.auth.access_token;
+    const email = this.props.auth.email;
+    const book_id = this.props.params.id;
+    this.props.borrowBook({ access_token, email, book_id });
+  };
+
+  _returnBook = () => {
+    const access_token = this.props.auth.access_token;
+    const email = this.props.auth.email;
+    const book_id = this.props.params.id;
+    this.props.returnBook({ access_token, email, book_id });
+  };
+
   componentDidMount() {
     this._getSingleBook();
-    if (this.props.book.book.status === 'Borrowed') {
-      this.setState({
-        borrowedStatus: !this.state.borrowedStatus,
-        returnedStatus: !this.state.returnedStatus
-      });
-    }
   }
+
   render() {
     const { book } = this.props.book;
+    let borrowedStatus = false;
+    if (this.props.book.book.status === 'Borrowed') {
+      borrowedStatus = true;
+    } else {
+      borrowedStatus = false;
+    }
     return (
       <div align="center">
+        <br />
         <Card body outline color="info" align="justify" className="col-sm-6">
           <div>
             <div className="bookHeader">
@@ -68,10 +85,16 @@ class SingleBook extends Component {
                   <DropdownMenu>
                     <div className="user">
                       <DropdownItem header>User</DropdownItem>
-                      <DropdownItem disabled={this.state.borrowedStatus}>
+                      <DropdownItem
+                        disabled={borrowedStatus}
+                        onClick={this._borrowBook}
+                      >
                         Borrow Book
                       </DropdownItem>
-                      <DropdownItem disabled={this.state.returnedStatus}>
+                      <DropdownItem
+                        disabled={!borrowedStatus}
+                        onClick={this._returnBook}
+                      >
                         Return Book
                       </DropdownItem>
                     </div>
@@ -123,8 +146,10 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getSingleBook: id => dispatch(getSingleBook(id)),
-  deleteBook: id => dispatch(deleteBook(id))
+  getSingleBook: data => dispatch(getSingleBook(data)),
+  deleteBook: data => dispatch(deleteBook(data)),
+  borrowBook: data => dispatch(borrowBook(data)),
+  returnBook: data => dispatch(returnBook(data))
 });
 
 SingleBook.propTypes = {
@@ -132,7 +157,9 @@ SingleBook.propTypes = {
   auth: PropTypes.object,
   params: PropTypes.object,
   getSingleBook: PropTypes.func,
-  deleteBook: PropTypes.func
+  deleteBook: PropTypes.func,
+  borrowBook: PropTypes.func,
+  returnBook: PropTypes.func
 };
 
 export default connect(

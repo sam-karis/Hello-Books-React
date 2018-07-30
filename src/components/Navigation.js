@@ -100,7 +100,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logout: data => logout(dispatch, data)
+  logout: data => dispatch(logout(data))
 });
 
 Header.propTypes = {

@@ -47,7 +47,7 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
-  getAllBooks: data => getAllBooks(dispatch, data)
+  getAllBooks: () => dispatch(getAllBooks())
 });
 
 Books.propTypes = {
