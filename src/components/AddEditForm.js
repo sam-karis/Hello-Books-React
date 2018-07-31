@@ -97,7 +97,7 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
-  addBook: data => addBook(dispatch, data)
+  addBook: data => dispatch(addBook(data))
 });
 
 AddEdit.propTypes = {
