@@ -13,9 +13,15 @@ import AddEditForm from './components/AddEditForm';
 import EditBook from './components/EditBook';
 import SingleBook from './components/SingleBook';
 import BorrowHistory from './components/BorrowHistory';
+import RequestReset from './components/RequestReset';
+import ResetPassword from './components/ResetPassword';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store/configureStore';
 
+
+/**
+ * Define application routes
+ */
 class App extends React.Component {
   render() {
     return (
@@ -26,7 +32,10 @@ class App extends React.Component {
             <Route path="home" component={Home} />
             <Route path="login" component={Login} />
             <Route path="register" component={Register} />
-            <Route path="books" component={Books} />
+            <Route path="requestreset" component={RequestReset} />
+            <Route path="resetpassword/:token/:email" component={ResetPassword} />
+            <Route path="resetpassword" component={ResetPassword} />
+            <Route path="books" component={Books}/>
             <Route path="books/:id" component={SingleBook} />
             <Route path="add" component={AddEditForm} />
             <Route path="edit/:id" component={EditBook} />

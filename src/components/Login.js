@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import { login } from '../actions/Login';
 import PropTypes from 'prop-types';
 
+
+/**
+ * This component render login page
+ */
 class Login extends Component {
   constructor() {
     super();
@@ -75,7 +79,7 @@ class Login extends Component {
           <br />
           <div>
             <span className="psw">
-              <a href="/">Forgot password?</a>
+              <Link to="/requestreset">Forgot password?</Link>
             </span>
           </div>
         </Form>
@@ -98,6 +102,9 @@ const mapDispatchToProps = dispatch => ({
   login: data => dispatch(login(data))
 });
 
+/**
+ * Validate props
+ */
 Login.propTypes = {
   auth: PropTypes.object,
   login: PropTypes.func
