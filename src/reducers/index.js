@@ -1,4 +1,4 @@
-import auth from './AuthReducer';
+import {auth, passwordReset} from './AuthReducer';
 import { books, book } from './BooksReducer';
 import admin from './AdminReducer';
 import history from './BorrowHistoryReducer';
@@ -12,5 +12,6 @@ export default combineReducers({
   book,
   history,
   borrowBook,
-  returnBook
+  returnBook,
+  passwordReset
 });
