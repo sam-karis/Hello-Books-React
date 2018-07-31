@@ -3,7 +3,11 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  REQUEST_RESET_SUCCESS,
+  REQUEST_RESET_FAIL,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAIL
 } from '../actions/constants';
 
 const initialState = {
@@ -15,7 +19,17 @@ const initialState = {
   isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
   error: null
 };
-export default (state = initialState, action) => {
+
+const resetInitialState = {
+  error: null,
+  email: localStorage.getItem('resetEmail'),
+  token: localStorage.getItem('resetToken')
+};
+
+/**
+ * Authentication Reducer
+ */
+const auth = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
@@ -59,3 +73,39 @@ export default (state = initialState, action) => {
       return { ...state };
   }
 };
+
+/**
+ * Password Reset Reducer
+ */
+const passwordReset = (state = resetInitialState, action) => {
+  switch (action.type) {
+    case REQUEST_RESET_SUCCESS:
+      return {
+        ...state,
+        Message: action.data.Message
+      };
+    case REQUEST_RESET_FAIL:
+      return {
+        ...state,
+        Message: action.data.Message,
+        error: true
+      };
+
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        Message: action.data.Message,
+        email: null
+      };
+    case RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        Message: action.data.Message,
+        error: true
+      };
+    default:
+      return { ...state };
+  }
+};
+
+export { auth, passwordReset };

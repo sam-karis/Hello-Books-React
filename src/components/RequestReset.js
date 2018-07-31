@@ -1,57 +1,57 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory, Link } from 'react-router';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
-import { login } from '../actions/Login';
 import PropTypes from 'prop-types';
-
+import { requestReset } from '../actions/ResetPassword';
 
 /**
- * This component render login page
+ * This component render page for users to request password reset
  */
-class Login extends Component {
+class RequestReset extends Component {
   constructor() {
     super();
     this.state = {
       visible: true
     };
   }
-  componentDidMount() {
-    if (this.props.auth.loggedIn) {
-      browserHistory.push('/books');
-    }
-  }
 
+  /**
+   * The function closes the alert box
+   */
   _onDismiss = () => {
     this.setState({
       visible: false
     });
   };
 
-  _login = e => {
+  /**
+   * Makes a server request to send an password reset link into user email
+   * @param {string} email
+   * @return {string} message
+   */
+  _requestReset = e => {
     e.preventDefault();
     const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    this.props.login({ email, password });
+    this.props.requestReset({ email });
     this.forceUpdate();
   };
 
   render() {
     return (
       <div className="loginform">
-        <h1>Login</h1>
-        <p>Enter you credentials to login.</p>
+        <h5>Request Password Reset</h5>
+        <p>Enter your email.</p>
         <hr />
-        {this.props.auth.error ? (
+        {this.props.passwordReset.error ? (
           <Alert
             isOpen={this.state.visible}
             color="danger"
             toggle={this._onDismiss}
           >
-            {this.props.auth.Message}
+            {this.props.passwordReset.Message}
           </Alert>
         ) : null}
-        <Form onSubmit={this._login}>
+        <Form onSubmit={this._requestReset}>
           <div className="form-group">
             <Label for="exampleEmail">
               <b>Email</b>
@@ -65,23 +65,12 @@ class Login extends Component {
             />
           </div>
           <div className="form-group">
-            <Label for="examplePassword">
-              <b>Password</b>
-            </Label>
-            <Input type="password" name="password" placeholder="password" />
-          </div>
-          <div className="form-group">
             <Button type="submit" id="submit">
-              Login
+              Submit
             </Button>
           </div>
           <br />
           <br />
-          <div>
-            <span className="psw">
-              <Link to="/requestreset">Forgot password?</Link>
-            </span>
-          </div>
         </Form>
       </div>
     );
@@ -94,23 +83,23 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    passwordReset: state.passwordReset
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: data => dispatch(login(data))
+  requestReset: data => dispatch(requestReset(data))
 });
 
 /**
  * Validate props
  */
-Login.propTypes = {
-  auth: PropTypes.object,
-  login: PropTypes.func
+RequestReset.propTypes = {
+  passwordReset: PropTypes.object,
+  requestReset: PropTypes.func
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(RequestReset);
