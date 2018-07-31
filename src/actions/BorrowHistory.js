@@ -2,7 +2,13 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { browserHistory } from 'react-router';
 import { api_url, request_header} from './../config';
+import { logout } from '../actions/Logout';
 
+
+/**
+ * Get a user borrowing history
+ * @returns{Object} - Books and time when borrowed/returned
+ */
 export const getBorrowHistory = data => {
   return dispatch => {
     const borrow_history_url = `${api_url}users/books`;
@@ -20,6 +26,9 @@ export const getBorrowHistory = data => {
         if (error.response.status === 401) {
           const Message = 'session expired login to continue';
           swal(Message);
+          dispatch(
+            logout({ email: data.email, access_token: data.access_token })
+          );
           browserHistory.push('/login');
         }
       });
