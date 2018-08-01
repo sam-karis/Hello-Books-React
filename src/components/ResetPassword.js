@@ -20,9 +20,11 @@ class Resetpassword extends Component {
    * This get password resetToken and email for the user
    */
   componentDidMount() {
-    localStorage.setItem('resetToken', this.props.params.token);
-    localStorage.setItem('resetEmail', this.props.params.email);
-    browserHistory.push('/resetPassword');
+    if (this.props.params.token) {
+      localStorage.setItem('resetToken', this.props.params.token);
+      localStorage.setItem('resetEmail', this.props.params.email);
+      browserHistory.push('/resetPassword');
+    }
   }
 
   _onDismiss = () => {
