@@ -3,6 +3,11 @@ import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import { api_url } from './../config';
 
+/**
+ * Register user function
+ * @param{Object} - data
+ * @returns{String} - Message
+ */
 export const register = data => {
   return dispatch => {
     const register_url = `${api_url}auth/register`;
@@ -24,11 +29,9 @@ export const register = data => {
         if (error.response.status === 406) {
           const Message = error.response.data.Message;
           dispatch({ type: 'REGISTER_FAIL', data: { Message } });
-          swal('NOT ACCEPTABLE', Message, 'error');
         } else if (error.response.status === 409) {
           const Message = error.response.data.Message;
           dispatch({ type: 'REGISTER_FAIL', data: { Message } });
-          swal('CONFLICT!!', Message, 'error');
         }
       });
   };

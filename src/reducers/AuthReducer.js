@@ -67,7 +67,8 @@ const auth = (state = initialState, action) => {
     case REGISTER_FAIL:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        error: true
       };
     default:
       return { ...state };

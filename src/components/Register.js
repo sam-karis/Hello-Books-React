@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Form, Label, Input } from 'reactstrap';
+import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import { register } from '../actions/Register';
 import PropTypes from 'prop-types';
 
+/**
+ * This component render sign up page
+ */
 class Register extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      visible: true
+    };
   }
 
+  /**
+   * The function closes the alert box
+   */
+  _onDismiss = () => {
+    this.setState({
+      visible: false
+    });
+  };
+
+  /**
+   * Makes a server request to regester a new user
+   * @param {Odject} - data
+   * @return {string} message
+   */
   _register = e => {
     e.preventDefault();
     const name = e.target.elements.name.value;
@@ -25,6 +44,15 @@ class Register extends Component {
         <h1>Sign Up</h1>
         <p>Please fill in this form to create an account.</p>
         <hr />
+        {this.props.auth.error ? (
+          <Alert
+            isOpen={this.state.visible}
+            color="danger"
+            toggle={this._onDismiss}
+          >
+            {this.props.auth.Message}
+          </Alert>
+        ) : null}
         <Form onSubmit={this._register}>
           <div className="form-group">
             <Label for="name">
@@ -105,9 +133,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  register: data => dispatch(register( data))
+  register: data => dispatch(register(data))
 });
 
+/**
+ * Validate props
+ */
 Register.propTypes = {
   auth: PropTypes.object,
   register: PropTypes.func
