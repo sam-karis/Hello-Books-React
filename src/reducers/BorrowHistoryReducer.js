@@ -1,12 +1,14 @@
 import {
   BORROW_HISTORY_SUCCESS,
-  BORROW_HISTORY_FAIL
+  BORROW_HISTORY_FAIL,
+  BORROW_HISTORY_FETCH
 } from '../actions/constants';
 
 const initialState = {
   Message: '',
   history: [],
-  error: false
+  error: false,
+  fetching: false
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -14,14 +16,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         history: action.data,
-        error: false
+        error: false,
+        fetching: false
+      };
+    case BORROW_HISTORY_FETCH:
+      return {
+        ...state,
+        history: [],
+        error: false,
+        fetching: true
       };
     case BORROW_HISTORY_FAIL:
       return {
         ...state,
         Message: action.data.Message,
         error: true,
-        history: []
+        history: [],
+        fetching: false
       };
     default:
       return { ...state };

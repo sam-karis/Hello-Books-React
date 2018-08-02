@@ -11,16 +11,22 @@ import { logout } from '../actions/Logout';
  */
 export const getBorrowHistory = data => {
   return dispatch => {
+    dispatch({ type: 'BORROW_HISTORY_FETCH' });
+    let filter = {};
+    if (!(data.returned)){
+      filter = {returned: data.returned};
+    }
     const borrow_history_url = `${api_url}users/books`;
     return axios
-      .get(borrow_history_url, { headers: request_header(data.access_token) })
+      .get(borrow_history_url, { params:filter,
+        headers: request_header(data.access_token) })
       .then(res => {
         if(res.data.status === 204){
           const Message = res.data.Message;
           return dispatch({ type: 'BORROW_HISTORY_FAIL', data: { Message } });
         }
         const history = res.data.books;
-        dispatch({ type: 'BORROW_HISTORY_SUCCESS', data: history });
+        return dispatch({ type: 'BORROW_HISTORY_SUCCESS', data: history });
       })
       .catch(error => {
         if (error.response.status === 401) {
