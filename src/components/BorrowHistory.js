@@ -25,7 +25,7 @@ class BorrowHistory extends Component {
     });
   };
 
-  _getBorrowHistory(returned = null){
+  _getBorrowHistory(returned = null) {
     const access_token = this.props.auth.access_token;
     this.props.getBorrowHistory({ access_token, returned });
   }
@@ -38,7 +38,7 @@ class BorrowHistory extends Component {
 
   render() {
     const { history } = this.props.history;
-    const {fetching} = this.props.history;
+    const { fetching } = this.props.history;
 
     return (
       <div id="borrowHistory">
@@ -61,7 +61,9 @@ class BorrowHistory extends Component {
                 </DropdownToggle>
                 <DropdownMenu>
                   <div>
-                    <DropdownItem onClick={() => this._getBorrowHistory(true)}>All books borrowed</DropdownItem>
+                    <DropdownItem onClick={() => this._getBorrowHistory(true)}>
+                      All books borrowed
+                    </DropdownItem>
                     <DropdownItem onClick={() => this._getBorrowHistory(false)}>
                       Books not Returned
                     </DropdownItem>

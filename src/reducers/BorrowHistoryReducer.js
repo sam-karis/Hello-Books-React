@@ -8,7 +8,7 @@ const initialState = {
   Message: '',
   history: [],
   error: false,
-  fetching: false,
+  fetching: false
 };
 export default (state = initialState, action) => {
   switch (action.type) {
