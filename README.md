@@ -1,5 +1,7 @@
 # Hello-Books-API
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d26dff5a5e949aeb724dc336d8c9efa)](https://app.codacy.com/app/sam-karis/Hello-Books-React?utm_source=github.com&utm_medium=referral&utm_content=sam-karis/Hello-Books-React&utm_campaign=badger)
+
 Hello-Books-APi is a library management appication. It help in management and tracking of books and users who interact with the library's books. The application also enable new users to register while existing users can login. Users can also reset their password and borrow books.
 
 - To view documentation for the API click [here](https://hellobookapi.docs.apiary.io/).   
