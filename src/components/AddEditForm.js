@@ -10,6 +10,9 @@ class AddEdit extends Component {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
     }
+    if (!this.props.auth.isAdmin) {
+      browserHistory.push('/books');
+    }
   }
 
   _addBook = e => {

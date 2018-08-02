@@ -5,7 +5,7 @@ import { api_url } from './../config';
 export const login = data => {
   return dispatch => {
     const login_url = `${api_url}auth/login`;
-    axios
+    return axios
       .post(login_url, {
         email: data.email,
         password: data.password
