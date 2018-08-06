@@ -5,7 +5,14 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { addBook } from '../actions/Admin';
 
-class AddEdit extends Component {
+class AddBook extends Component {
+  constructor() {
+    super();
+    this.state = {
+      visible: true
+    };
+  }
+
   componentDidMount() {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
@@ -14,6 +21,12 @@ class AddEdit extends Component {
       browserHistory.push('/books');
     }
   }
+
+  _onDismiss = () => {
+    this.setState({
+      visible: false
+    });
+  };
 
   _addBook = e => {
     e.preventDefault();
@@ -32,13 +45,13 @@ class AddEdit extends Component {
         <h4>Add a book in the library</h4>
         <p>Enter book details.</p>
         <hr />
-        {this.props.auth.error ? (
+        {this.props.admin.error ? (
           <Alert
             isOpen={this.state.visible}
             color="danger"
             toggle={this._onDismiss}
           >
-            {this.props.auth.Message}
+            {this.props.admin.Message}
           </Alert>
         ) : null}
         <Form onSubmit={this._addBook}>
@@ -96,6 +109,7 @@ class AddEdit extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.auth,
+    admin: state.admin,
     books: state.books
   };
 };
@@ -103,7 +117,7 @@ const mapDispatchToProps = dispatch => ({
   addBook: data => dispatch(addBook(data))
 });
 
-AddEdit.propTypes = {
+AddBook.propTypes = {
   books: PropTypes.object,
   auth: PropTypes.object,
   admin: PropTypes.object,
@@ -113,4 +127,4 @@ AddEdit.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddEdit);
+)(AddBook);

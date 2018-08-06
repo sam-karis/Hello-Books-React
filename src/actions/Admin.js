@@ -25,9 +25,17 @@ export const addBook = data => {
         browserHistory.push('/books');
       })
       .catch(error => {
-        const Message = error.response.data.Message;
-        dispatch({ type: 'ADD_BOOK_FAIL', data: { Message } });
-        swal('NOT ACCEPTABLE', Message, 'error');
+        if (error.response.status === 401) {
+          const Message = 'session expired login to continue';
+          swal(Message);
+          dispatch(
+            logout({ email: data.email, access_token: data.access_token })
+          );
+        }
+        if (error.response.status === 409) {
+          const Message = error.response.data.Message;
+          dispatch({ type: 'ADD_BOOK_FAIL', data: { Message } });
+        }
       });
   };
 };
@@ -80,6 +88,10 @@ export const deleteBook = data => {
         browserHistory.push('/books');
       })
       .catch(error => {
+        if (error.response.status === 409) {
+          const Message = error.response.data.Message;
+          swal(Message);
+        }
         if (error.response.status === 401) {
           const Message = 'session expired login to continue';
           swal(Message);

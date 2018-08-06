@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Form, Alert, Label, Input, Button } from 'reactstrap';
+import React, { Component, Fragment } from 'react';
+import { Form, Label, Input, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
@@ -64,74 +64,71 @@ class EditBook extends Component {
     return (
       <div className="addEditForm">
         <h4>Edit a book in the library</h4>
-        <p>Enter book details.</p>
-        <hr />
-        {this.props.auth.error ? (
-          <Alert
-            isOpen={this.state.visible}
-            color="danger"
-            toggle={this._onDismiss}
-          >
-            {this.props.auth.Message}
-          </Alert>
-        ) : null}
-        <Form onSubmit={this._editBook}>
-          <div className="form-group">
-            <Label for="title">
-              <b>Title</b>
-            </Label>
-            <Input
-              type="text"
-              name="Title"
-              value={this.getValue('Title')}
-              onChange={this.handleChange}
-              placeholder="Book title"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <Label for="author">
-              <b>Author</b>
-            </Label>
-            <Input
-              type="text"
-              name="author"
-              value={this.getValue('author')}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <Label for="edition">
-              <b>Edition</b>
-            </Label>
-            <Input
-              type="text"
-              name="edition"
-              value={this.getValue('edition')}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <Label for="description">
-              <b>Description</b>
-            </Label>
-            <Input
-              type="text"
-              name="description"
-              value={this.getValue('description')}
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <Button type="submit" id="submit" className="btn btn-success">
-              Save
-            </Button>
-          </div>
-          <br />
-        </Form>
+        {!this.props.book.error ? (
+          <Fragment>
+            <p>Enter book details.</p>
+            <hr />
+            <Form onSubmit={this._editBook}>
+              <div className="form-group">
+                <Label for="title">
+                  <b>Title</b>
+                </Label>
+                <Input
+                  type="text"
+                  name="Title"
+                  value={this.getValue('Title')}
+                  onChange={this.handleChange}
+                  placeholder="Book title"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <Label for="author">
+                  <b>Author</b>
+                </Label>
+                <Input
+                  type="text"
+                  name="author"
+                  value={this.getValue('author')}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <Label for="edition">
+                  <b>Edition</b>
+                </Label>
+                <Input
+                  type="text"
+                  name="edition"
+                  value={this.getValue('edition')}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <Label for="description">
+                  <b>Description</b>
+                </Label>
+                <Input
+                  type="text"
+                  name="description"
+                  value={this.getValue('description')}
+                  onChange={this.handleChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <Button type="submit" id="submit" className="btn btn-success">
+                  Save
+                </Button>
+              </div>
+              <br />
+            </Form>
+          </Fragment>
+        ) : (
+          browserHistory.push(`/books/${this.book_id}`)
+        )}
       </div>
     );
   }

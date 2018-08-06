@@ -78,13 +78,12 @@ class SingleBook extends Component {
             <div className="bookHeader">
               <CardTitle className="content-center">Book Details</CardTitle>
             </div>
-            {this.props.auth.loggedIn ? (
+            {this.props.auth.loggedIn && !this.props.book.error ? (
               <div className="action">
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle caret>Actions</DropdownToggle>
                   <DropdownMenu>
                     <div className="user">
-                      <DropdownItem header>User</DropdownItem>
                       <DropdownItem
                         disabled={borrowedStatus}
                         onClick={this._borrowBook}
@@ -101,7 +100,6 @@ class SingleBook extends Component {
                     {this.props.auth.isAdmin ? (
                       <div className="admin">
                         <DropdownItem divider />
-                        <DropdownItem header>Admin</DropdownItem>
                         <DropdownItem tag={Link} to={`/edit/${book.book_id}`}>Edit</DropdownItem>
                         <DropdownItem onClick={this._deleteBook}>
                           Delete
