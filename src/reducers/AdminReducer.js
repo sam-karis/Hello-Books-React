@@ -20,22 +20,26 @@ export default (state = initialState, action) => {
     case ADD_BOOK_FAIL:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        error: true
       };
     case DELETE_BOOK_SUCCESS:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        error: false
       };
     case DELETE_BOOK_FAIL:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        error: true
       };
     case EDIT_BOOK_SUCCESS:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        error: false
       };
     default:
       return { ...state };
