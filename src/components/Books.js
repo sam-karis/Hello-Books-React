@@ -4,15 +4,26 @@ import { Link } from 'react-router';
 import Book from './Book';
 import { getAllBooks } from '../actions/Books';
 import PropTypes from 'prop-types';
+import JwPagination from 'jw-react-pagination';
 
 class Books extends Component {
+  constructor(){
+    super();
+    this.state = {
+      pageOfItems: []
+    };
+  }
 
   componentDidMount() {
     this.props.getAllBooks();
   }
 
+  _onchangePage = (pageOfItems) => {
+    this.setState({ pageOfItems });
+  }
+
   render() {
-    let book = this.props.books.books.map(book => {
+    let book = this.state.pageOfItems.map(book => {
       return <Book key={book.book_id} book={book} />;
     });
 
@@ -25,6 +36,7 @@ class Books extends Component {
         </div>
 
         <div className="row">{book}</div>
+        < JwPagination items={this.props.books.books} pageSize={8} onChangePage={this._onchangePage}/>
 
         {this.props.auth.isAdmin ? (
           <Link
