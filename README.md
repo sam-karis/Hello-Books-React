@@ -1,5 +1,6 @@
 # Hello-Books-React
 
+[![Build Status](https://travis-ci.org/sam-karis/Hello-Books-React.svg?branch=develop)](https://travis-ci.org/sam-karis/Hello-Books-React)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f3175d9d2d15ab7e6861/maintainability)](https://codeclimate.com/github/sam-karis/Hello-Books-React/maintainability)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5411087ed4f041d48e26e69b7297e74f)](https://www.codacy.com/project/sam-karis/Hello-Books-React/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sam-karis/Hello-Books-React&amp;utm_campaign=Badge_Grade_Dashboard)
 [![Coverage Status](https://coveralls.io/repos/github/sam-karis/Hello-Books-React/badge.svg?branch=develop)](https://coveralls.io/github/sam-karis/Hello-Books-React?branch=develop)
