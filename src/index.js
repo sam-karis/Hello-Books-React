@@ -9,7 +9,7 @@ import Root from './components/Root';
 import Login from './components/Login';
 import Register from './components/Register';
 import Books from './components/Books';
-import AddEditForm from './components/AddEditForm';
+import AddBook from './components/AddBook';
 import EditBook from './components/EditBook';
 import SingleBook from './components/SingleBook';
 import BorrowHistory from './components/BorrowHistory';
@@ -37,7 +37,7 @@ class App extends React.Component {
             <Route path="resetpassword" component={ResetPassword} />
             <Route path="books" component={Books}/>
             <Route path="books/:id" component={SingleBook} />
-            <Route path="add" component={AddEditForm} />
+            <Route path="add" component={AddBook} />
             <Route path="edit/:id" component={EditBook} />
             <Route path="userhistory" component={BorrowHistory} />
           </Route>
