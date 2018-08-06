@@ -3,6 +3,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f3175d9d2d15ab7e6861/maintainability)](https://codeclimate.com/github/sam-karis/Hello-Books-React/maintainability)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5411087ed4f041d48e26e69b7297e74f)](https://www.codacy.com/project/sam-karis/Hello-Books-React/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sam-karis/Hello-Books-React&amp;utm_campaign=Badge_Grade_Dashboard)
 
+[![Coverage Status](https://coveralls.io/repos/github/sam-karis/Hello-Books-React/badge.svg?branch=master)](https://coveralls.io/github/sam-karis/Hello-Books-React?branch=ch-tests-159497088)
+
 Hello-Books-React is a library management appication. It help in management and tracking of books and users who interact with the library's books. The application enable new users to register while existing users can login borrow, return and view their borrowing history. Application admins have the ability to add, edit, and delete books from the library
 
 - To view the application online click [here](https://hello-books-react.herokuapp.com/).  
