@@ -10,12 +10,15 @@ import {
 import PropTypes from 'prop-types';
 import { browserHistory, Link } from 'react-router';
 import { getBorrowHistory } from '../actions/BorrowHistory';
+import JwPagination from 'jw-react-pagination';
+import { pageLoader } from './../config';
 
 class BorrowHistory extends Component {
   constructor() {
     super();
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      pageOfItems: []
     };
   }
 
@@ -29,6 +32,11 @@ class BorrowHistory extends Component {
     const access_token = this.props.auth.access_token;
     this.props.getBorrowHistory({ access_token, returned });
   }
+
+  _onchangePage = pageOfItems => {
+    this.setState({ pageOfItems });
+  };
+
   componentDidMount() {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
@@ -37,7 +45,7 @@ class BorrowHistory extends Component {
   }
 
   render() {
-    const { history } = this.props.history;
+    const history = this.state.pageOfItems;
     const { fetching } = this.props.history;
 
     return (
@@ -54,37 +62,46 @@ class BorrowHistory extends Component {
           </div>
         ) : (
           <Fragment>
-            <div className="action">
-              <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                <DropdownToggle caret color="success">
-                  Filter History
-                </DropdownToggle>
-                <DropdownMenu>
-                  <div>
-                    <DropdownItem onClick={() => this._getBorrowHistory(true)}>
-                      All books borrowed
-                    </DropdownItem>
-                    <DropdownItem onClick={() => this._getBorrowHistory(false)}>
-                      Books not Returned
-                    </DropdownItem>
-                  </div>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
+            {fetching ? (
+              <div className="row">{pageLoader}</div>
+            ) : (
+              <Fragment>
+                <div className="action">
+                  <Dropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggle}
+                  >
+                    <DropdownToggle caret color="success">
+                      Filter History
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <div>
+                        <DropdownItem
+                          onClick={() => this._getBorrowHistory(true)}
+                        >
+                          All books borrowed
+                        </DropdownItem>
+                        <DropdownItem
+                          onClick={() => this._getBorrowHistory(false)}
+                        >
+                          Books not Returned
+                        </DropdownItem>
+                      </div>
+                    </DropdownMenu>
+                  </Dropdown>
+                </div>
 
-            <Table hover bordered>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Borrow Date</th>
-                  <th>Return Date</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!fetching ? (
-                  <Fragment>
+                <Table hover bordered>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Author</th>
+                      <th>Borrow Date</th>
+                      <th>Return Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     {history.map((history, index) => (
                       <tr key={index}>
                         <td>{history.Title}</td>
@@ -98,10 +115,16 @@ class BorrowHistory extends Component {
                         </td>
                       </tr>
                     ))}
-                  </Fragment>
-                ) : null}
-              </tbody>
-            </Table>
+                  </tbody>
+                </Table>
+
+                <JwPagination
+                  items={this.props.history.history}
+                  pageSize={10}
+                  onChangePage={this._onchangePage}
+                />
+              </Fragment>
+            )}
           </Fragment>
         )}
       </div>
