@@ -1,4 +1,5 @@
 import {
+  AUTH_FETCHING,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
@@ -7,7 +8,8 @@ import {
   REQUEST_RESET_SUCCESS,
   REQUEST_RESET_FAIL,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAIL
+  RESET_PASSWORD_FAIL,
+  PASSWORD_FETCHING
 } from '../actions/constants';
 
 const initialState = {
@@ -17,13 +19,15 @@ const initialState = {
   access_token: localStorage.getItem('access_token'),
   email: localStorage.getItem('email'),
   isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
-  error: null
+  error: null,
+  loading: false
 };
 
 const resetInitialState = {
   error: null,
   email: localStorage.getItem('resetEmail'),
-  token: localStorage.getItem('resetToken')
+  token: localStorage.getItem('resetToken'),
+  loading: false
 };
 
 /**
@@ -31,6 +35,11 @@ const resetInitialState = {
  */
 const auth = (state = initialState, action) => {
   switch (action.type) {
+    case AUTH_FETCHING:
+      return {
+        ...state,
+        loading: true
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -39,14 +48,16 @@ const auth = (state = initialState, action) => {
         username: action.data.username,
         email: action.data.email,
         isAdmin: action.data.isAdmin,
-        Message: 'Logged in successfully'
+        Message: 'Logged in successfully',
+        loading: false
       };
     case LOGIN_FAIL:
       return {
         ...state,
         Message: action.data.Message,
         loggedIn: false,
-        error: true
+        error: true,
+        loading: false
       };
     case LOGOUT_SUCCESS:
       return {
@@ -57,18 +68,21 @@ const auth = (state = initialState, action) => {
         email: null,
         isAdmin: null,
         loggedIn: false,
-        error: null
+        error: null,
+        loading: false
       };
     case REGISTER_SUCCESS:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        loading: false
       };
     case REGISTER_FAIL:
       return {
         ...state,
         Message: action.data.Message,
-        error: true
+        error: true,
+        loading: false
       };
     default:
       return { ...state };
@@ -80,29 +94,38 @@ const auth = (state = initialState, action) => {
  */
 const passwordReset = (state = resetInitialState, action) => {
   switch (action.type) {
+    case PASSWORD_FETCHING:
+      return {
+        ...state,
+        loading: true
+      };
     case REQUEST_RESET_SUCCESS:
       return {
         ...state,
-        Message: action.data.Message
+        Message: action.data.Message,
+        loading: false
       };
     case REQUEST_RESET_FAIL:
       return {
         ...state,
         Message: action.data.Message,
-        error: true
+        error: true,
+        loading: false
       };
 
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         Message: action.data.Message,
-        email: null
+        email: null,
+        loading: false
       };
     case RESET_PASSWORD_FAIL:
       return {
         ...state,
         Message: action.data.Message,
-        error: true
+        error: true,
+        loading: false
       };
     default:
       return { ...state };

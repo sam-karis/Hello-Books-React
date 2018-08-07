@@ -12,6 +12,7 @@ const reset_url = `${api_url}auth/reset-password`;
  */
 export const requestReset = data => {
   return dispatch => {
+    dispatch({'type': 'PASSWORD_FETCHING'});
     return axios
       .post(reset_url, {
         email: data.email

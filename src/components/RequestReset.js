@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { requestReset } from '../actions/ResetPassword';
+import { loader } from './../config';
 
 /**
  * This component render page for users to request password reset
@@ -64,12 +65,15 @@ class RequestReset extends Component {
               autoComplete="email"
             />
           </div>
-          <div className="form-group">
-            <Button type="submit" id="submit">
-              Submit
-            </Button>
+          <div className="form-group" id="submit">
+            {!this.props.passwordReset.loading ? (
+              <Button type="submit">
+                Submit
+              </Button>
+            ) : (
+              loader
+            )}
           </div>
-          <br />
           <br />
         </Form>
       </div>

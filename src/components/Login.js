@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import { login } from '../actions/Login';
+import { loader } from './../config';
 import PropTypes from 'prop-types';
-
 
 /**
  * This component render login page
@@ -70,10 +70,14 @@ class Login extends Component {
             </Label>
             <Input type="password" name="password" placeholder="password" />
           </div>
-          <div className="form-group">
-            <Button type="submit" id="submit">
-              Login
-            </Button>
+          <div className="form-group" id="submit">
+            {!this.props.auth.loading ? (
+              <Button type="submit">
+                Login
+              </Button>
+            ) : (
+              loader
+            )}
           </div>
           <br />
           <br />

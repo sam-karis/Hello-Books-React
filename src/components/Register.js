@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import { register } from '../actions/Register';
-import PropTypes from 'prop-types';
+import { loader } from './../config';
 
 /**
  * This component render sign up page
@@ -108,12 +109,16 @@ class Register extends Component {
               required
             />
           </div>
-
-          <div className="form-group">
-            <Button type="submit" id="submit">
+          <div className="form-group" id="submit">
+            {!this.props.auth.loading ? (
+              <Button type="submit">
               Sign up
-            </Button>
+              </Button>
+            ) : (
+              loader
+            )}
           </div>
+
           <br />
           <br />
         </Form>
