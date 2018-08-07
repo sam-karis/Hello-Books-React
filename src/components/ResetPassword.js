@@ -4,6 +4,7 @@ import { Button, Form, Label, Input, Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { resetPassword } from '../actions/ResetPassword';
 import { browserHistory } from 'react-router';
+import { loader } from './../config';
 
 /**
  * This component render password reset page
@@ -83,10 +84,14 @@ class Resetpassword extends Component {
             </Label>
             <Input type="password" name="confirm_new_password" required />
           </div>
-          <div className="form-group">
-            <Button type="submit" id="submit">
-              Submit
-            </Button>
+          <div className="form-group" id="submit">
+            {!this.props.passwordReset.loading ? (
+              <Button type="submit">
+                Submit
+              </Button>
+            ) : (
+              loader
+            )}
           </div>
           <br />
           <br />

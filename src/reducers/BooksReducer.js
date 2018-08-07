@@ -1,21 +1,29 @@
 import {
   GET_ALL_BOOKS_SUCCESS,
   GET_ONE_BOOK_SUCCESS,
-  GET_ONE_BOOK_FAIL
+  GET_ONE_BOOK_FAIL,
+  FETCHING_BOOKS
 } from '../actions/constants';
 
 const initialState = {
-  books: []
+  books: [],
+  pageLoading: false
 };
 const SingleInitialState = {
   book: {}
 };
 const books = (state = initialState, action) => {
   switch (action.type) {
+    case FETCHING_BOOKS:
+      return {
+        ...state,
+        pageLoading: true
+      };
     case GET_ALL_BOOKS_SUCCESS:
       return {
         ...state,
-        books: action.data.books
+        books: action.data.books,
+        pageLoading: false
       };
     default:
       return { ...state };

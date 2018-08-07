@@ -11,6 +11,7 @@ import { api_url } from './../config';
 export const register = data => {
   return dispatch => {
     const register_url = `${api_url}auth/register`;
+    dispatch({'type':'AUTH_FETCHING'});
     axios
       .post(register_url, {
         name: data.name,

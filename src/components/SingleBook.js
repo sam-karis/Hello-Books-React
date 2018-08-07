@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory  } from 'react-router';
 import {
   Card,
   CardTitle,
@@ -127,7 +127,7 @@ class SingleBook extends Component {
               <CardText>{this.props.book.Message}</CardText>
             </CardBody>
           )}
-          <Link to="/books" className="btn btn-success" role="button">
+          <Link onClick={browserHistory.goBack} className="btn btn-success" role="button">
             Back
           </Link>
         </Card>

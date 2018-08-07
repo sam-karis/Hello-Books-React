@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Book from './Book';
 import { getAllBooks } from '../actions/Books';
 import PropTypes from 'prop-types';
 import JwPagination from 'jw-react-pagination';
+import { pageLoader } from './../config';
 
 class Books extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       pageOfItems: []
@@ -18,9 +19,9 @@ class Books extends Component {
     this.props.getAllBooks();
   }
 
-  _onchangePage = (pageOfItems) => {
+  _onchangePage = pageOfItems => {
     this.setState({ pageOfItems });
-  }
+  };
 
   render() {
     let book = this.state.pageOfItems.map(book => {
@@ -35,19 +36,32 @@ class Books extends Component {
           <hr />
         </div>
 
-        <div className="row">{book}</div>
-        < JwPagination items={this.props.books.books} pageSize={8} onChangePage={this._onchangePage}/>
+        <Fragment>
+          {this.props.books.pageLoading ? (
+            <div className="row">{pageLoader}</div>
+          ) : (
+            <Fragment>
+              <div className="row">{book}</div>
 
-        {this.props.auth.isAdmin ? (
-          <Link
-            id="addBookbtn"
-            to={'/add'}
-            className="btn btn-success"
-            role="button"
-          >
-            Add Book
-          </Link>
-        ) : null}
+              <JwPagination
+                items={this.props.books.books}
+                pageSize={8}
+                onChangePage={this._onchangePage}
+              />
+
+              {this.props.auth.isAdmin ? (
+                <Link
+                  id="addBookbtn"
+                  to={'/add'}
+                  className="btn btn-success"
+                  role="button"
+                >
+                  Add Book
+                </Link>
+              ) : null}
+            </Fragment>
+          )}
+        </Fragment>
       </div>
     );
   }

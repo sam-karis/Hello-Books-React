@@ -52,12 +52,14 @@ input[type='password'] {
   z-index: 10;
 }
 
-#books, #borrowHistory {
+#books,
+#borrowHistory {
   width: 80%;
   margin: auto;
 }
 
-h4, #noHistory {
+h4,
+#noHistory {
   text-align: center;
 }
 
@@ -96,4 +98,15 @@ h4, #noHistory {
   margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
+}
+
+#pageLoader {
+  font-size: 50px;
+  margin: auto;
+  padding: 10% 0 20% 0;
+}
+
+.pageNotFound {
+  text-align: center;
+  margin-left: auto;
 }
