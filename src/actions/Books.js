@@ -4,6 +4,7 @@ import { api_url } from './../config';
 
 const getAllBooks = () => {
   return dispatch => {
+    dispatch({'type': 'FETCHING_BOOKS'});
     const all_books_url = `${api_url}books`;
     return axios
       .get(all_books_url)
