@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import './styles/index.css';
 import Home from './components/Home';
 import Root from './components/Root';
@@ -15,6 +16,7 @@ import SingleBook from './components/SingleBook';
 import BorrowHistory from './components/BorrowHistory';
 import RequestReset from './components/RequestReset';
 import ResetPassword from './components/ResetPassword';
+import PageNotFound from './components/PageNotFound';
 import registerServiceWorker from './registerServiceWorker';
 import { store } from './store/configureStore';
 
@@ -40,6 +42,7 @@ class App extends React.Component {
             <Route path="add" component={AddBook} />
             <Route path="edit/:id" component={EditBook} />
             <Route path="userhistory" component={BorrowHistory} />
+            <Route path="*" component={PageNotFound} />
           </Route>
         </Router>
       </Provider>
