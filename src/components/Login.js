@@ -16,6 +16,9 @@ class Login extends Component {
       visible: true
     };
   }
+  /**
+   * redirect a user to books page after logging in
+   */
   componentDidMount() {
     if (this.props.auth.loggedIn) {
       browserHistory.push('/books');
@@ -28,6 +31,9 @@ class Login extends Component {
     });
   };
 
+  /**
+   * Makes a server request to log in a user
+   */
   _login = e => {
     e.preventDefault();
     const email = e.target.elements.email.value;
@@ -96,6 +102,9 @@ class Login extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth

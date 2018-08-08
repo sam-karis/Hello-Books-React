@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory  } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import {
   Card,
   CardTitle,
@@ -18,6 +18,9 @@ import { deleteBook } from '../actions/Admin';
 import { borrowBook } from '../actions/User';
 import { returnBook } from '../actions/User';
 
+/**
+ * This component render single book component
+ */
 class SingleBook extends Component {
   constructor(props) {
     super(props);
@@ -33,17 +36,26 @@ class SingleBook extends Component {
     });
   };
 
+  /**
+   * Makes a server request to get a single book
+   */
   _getSingleBook = () => {
     const book_id = this.props.params.id;
     this.props.getSingleBook(book_id);
   };
 
+  /**
+   * Makes a server request to delete a book
+   */
   _deleteBook = () => {
     const access_token = this.props.auth.access_token;
     const book_id = this.props.params.id;
     this.props.deleteBook({ access_token, book_id });
   };
 
+  /**
+   * Makes a server request to borrow a book
+   */
   _borrowBook = () => {
     const access_token = this.props.auth.access_token;
     const email = this.props.auth.email;
@@ -51,6 +63,9 @@ class SingleBook extends Component {
     this.props.borrowBook({ access_token, email, book_id });
   };
 
+  /**
+   * Makes a server request to return a book
+   */
   _returnBook = () => {
     const access_token = this.props.auth.access_token;
     const email = this.props.auth.email;
@@ -100,7 +115,9 @@ class SingleBook extends Component {
                     {this.props.auth.isAdmin ? (
                       <div className="admin">
                         <DropdownItem divider />
-                        <DropdownItem tag={Link} to={`/edit/${book.book_id}`}>Edit</DropdownItem>
+                        <DropdownItem tag={Link} to={`/edit/${book.book_id}`}>
+                          Edit
+                        </DropdownItem>
                         <DropdownItem onClick={this._deleteBook}>
                           Delete
                         </DropdownItem>
@@ -127,7 +144,11 @@ class SingleBook extends Component {
               <CardText>{this.props.book.Message}</CardText>
             </CardBody>
           )}
-          <Link onClick={browserHistory.goBack} className="btn btn-success" role="button">
+          <Link
+            onClick={browserHistory.goBack}
+            className="btn btn-success"
+            role="button"
+          >
             Back
           </Link>
         </Card>
@@ -150,6 +171,9 @@ const mapDispatchToProps = dispatch => ({
   returnBook: data => dispatch(returnBook(data))
 });
 
+/**
+ * Validate props
+ */
 SingleBook.propTypes = {
   book: PropTypes.object,
   auth: PropTypes.object,

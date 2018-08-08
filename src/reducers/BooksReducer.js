@@ -12,6 +12,10 @@ const initialState = {
 const SingleInitialState = {
   book: {}
 };
+
+/**
+ * All books Reducer
+ */
 const books = (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_BOOKS:
@@ -30,6 +34,9 @@ const books = (state = initialState, action) => {
   }
 };
 
+/**
+ * Single book related Reducer
+ */
 const book = (state = SingleInitialState, action) => {
   switch (action.type) {
     case GET_ONE_BOOK_SUCCESS:

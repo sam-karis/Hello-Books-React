@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+/**
+ * This component render footer for the application
+ */
 export default class Footer extends Component {
   render() {
     return (

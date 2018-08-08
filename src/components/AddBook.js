@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { addBook } from '../actions/Admin';
 
+/**
+ * This component render add book page
+ */
 class AddBook extends Component {
   constructor() {
     super();
@@ -13,6 +16,10 @@ class AddBook extends Component {
     };
   }
 
+  /**
+   * Protect the page from been assessed by normal users
+   * and users not logged in
+   */
   componentDidMount() {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
@@ -28,6 +35,9 @@ class AddBook extends Component {
     });
   };
 
+  /**
+   * Makes a server request to add a book
+   */
   _addBook = e => {
     e.preventDefault();
     const access_token = this.props.auth.access_token;
@@ -106,6 +116,9 @@ class AddBook extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth,
@@ -113,10 +126,14 @@ const mapStateToProps = state => {
     books: state.books
   };
 };
+
 const mapDispatchToProps = dispatch => ({
   addBook: data => dispatch(addBook(data))
 });
 
+/**
+ * Validate props
+ */
 AddBook.propTypes = {
   books: PropTypes.object,
   auth: PropTypes.object,

@@ -2,6 +2,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure } from 'enzyme';
 configure({ adapter: new Adapter() });
 
+/**
+ * Define localstorageMock for test
+ */
 const localStorageMock = (function() {
   let store = {};
 

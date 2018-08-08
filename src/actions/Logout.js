@@ -3,6 +3,9 @@ import { browserHistory } from 'react-router';
 import swal from 'sweetalert';
 import { api_url, request_header } from './../config';
 
+/**
+ * Clear user from logged in user from localstorage
+ */
 const clearUser = () => {
   localStorage.removeItem('loggedIn');
   localStorage.removeItem('username');
@@ -11,6 +14,11 @@ const clearUser = () => {
   localStorage.removeItem('access_token');
 };
 
+/**
+ * Logout user function
+ * @param{Object} - data
+ * @returns{String} - Message
+ */
 export const logout = data => {
   return dispatch => {
     const logout_url = `${api_url}auth/logout`;

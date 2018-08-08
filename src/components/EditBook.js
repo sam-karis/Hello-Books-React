@@ -6,6 +6,9 @@ import { browserHistory } from 'react-router';
 import { editBook } from '../actions/Admin';
 import { getSingleBook } from '../actions/Books';
 
+/**
+ * This component render edit book page
+ */
 class EditBook extends Component {
   constructor() {
     super();
@@ -14,6 +17,10 @@ class EditBook extends Component {
     };
   }
 
+  /**
+   * Protect the page from been assessed by normal users
+   * and users not logged in
+   */
   componentDidMount() {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
@@ -34,6 +41,9 @@ class EditBook extends Component {
     this.setState(val);
   };
 
+  /**
+   * Get the current value of a field from state
+   */
   getValue = name => {
     if (this.state.edited[name]) {
       return this.state[name];
@@ -134,6 +144,9 @@ class EditBook extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth,
@@ -145,6 +158,9 @@ const mapDispatchToProps = dispatch => ({
   getSingleBook: id => dispatch(getSingleBook(id))
 });
 
+/**
+ * Validate props
+ */
 EditBook.propTypes = {
   params: PropTypes.object,
   book: PropTypes.object,

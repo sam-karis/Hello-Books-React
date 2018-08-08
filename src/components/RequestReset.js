@@ -85,6 +85,9 @@ class RequestReset extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     passwordReset: state.passwordReset

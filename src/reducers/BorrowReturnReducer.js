@@ -9,6 +9,10 @@ const initialState = {
   Message: '',
   error: false
 };
+
+/**
+ * Borrow book Reducer
+ */
 const borrowBook = (state = initialState, action) => {
   switch (action.type) {
     case BORROW_BOOK_SUCCESS:
@@ -29,6 +33,9 @@ const borrowBook = (state = initialState, action) => {
   }
 };
 
+/**
+ * Return book Reducer
+ */
 const returnBook = (state = initialState, action) => {
   switch (action.type) {
     case RETURN_BOOK_SUCCESS:
