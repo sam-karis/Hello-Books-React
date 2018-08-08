@@ -12,7 +12,7 @@ export const register = data => {
   return dispatch => {
     const register_url = `${api_url}auth/register`;
     dispatch({'type':'AUTH_FETCHING'});
-    axios
+    return axios
       .post(register_url, {
         name: data.name,
         username: data.username,
