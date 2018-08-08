@@ -50,11 +50,6 @@ class Header extends Component {
                   Books
                 </Link>
               </NavItem>
-              <NavItem>
-                <Link to="/" id="drop" className="nav-link">
-                  About Us
-                </Link>
-              </NavItem>
               {!this.props.auth.loggedIn ? (
                 <Fragment>
                   <NavItem>
