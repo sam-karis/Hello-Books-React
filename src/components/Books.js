@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import JwPagination from 'jw-react-pagination';
 import { pageLoader } from './../config';
 
+/**
+ * This component render all books page
+ */
 class Books extends Component {
   constructor() {
     super();
@@ -15,6 +18,9 @@ class Books extends Component {
     };
   }
 
+  /**
+   * Makes a server request to get all available books
+   */
   componentDidMount() {
     this.props.getAllBooks();
   }
@@ -66,16 +72,24 @@ class Books extends Component {
     );
   }
 }
+
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth,
     books: state.books
   };
 };
+
 const mapDispatchToProps = dispatch => ({
   getAllBooks: () => dispatch(getAllBooks())
 });
 
+/**
+ * Validate props
+ */
 Books.propTypes = {
   books: PropTypes.object,
   auth: PropTypes.object,

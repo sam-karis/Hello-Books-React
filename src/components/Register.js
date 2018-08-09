@@ -131,6 +131,9 @@ class Register extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth

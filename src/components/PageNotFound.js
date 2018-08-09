@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 
+/**
+ * This component render page not found component
+ */
 export default class PageNotFound extends Component {
   render() {
     return (

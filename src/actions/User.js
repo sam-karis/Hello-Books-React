@@ -4,6 +4,11 @@ import { api_url, request_header} from './../config';
 import { getSingleBook } from '../actions/Books';
 import { logout } from '../actions/Logout';
 
+/**
+ * Borrow book function
+ * @param{Object} - data
+ * @returns{String} - Message
+ */
 const borrowBook = data => {
   return dispatch => {
     const borrow_url = `${api_url}users/books/${data.book_id}`;
@@ -32,6 +37,11 @@ const borrowBook = data => {
   };
 };
 
+/**
+ * Return book function
+ * @param{Object} - data
+ * @returns{String} - Message
+ */
 const returnBook = data => {
   return dispatch => {
     const return_url = `${api_url}users/books/${data.book_id}`;

@@ -2,6 +2,12 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { api_url } from './../config';
 
+
+/**
+ * Login user function
+ * @param{Object} - data
+ * @returns{Object} - user data and access token
+ */
 export const login = data => {
   return dispatch => {
     const login_url = `${api_url}auth/login`;

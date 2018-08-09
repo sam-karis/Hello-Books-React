@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+
+/**
+ * This component render the home page
+ */
 class Home extends Component {
   constructor() {
     super();

@@ -5,6 +5,9 @@ import history from './BorrowHistoryReducer';
 import {borrowBook, returnBook} from './BorrowReturnReducer';
 import { combineReducers } from 'redux';
 
+/**
+ * Combine and export all Reducer
+ */
 export default combineReducers({
   auth,
   admin,

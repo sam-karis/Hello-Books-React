@@ -13,6 +13,9 @@ import { getBorrowHistory } from '../actions/BorrowHistory';
 import JwPagination from 'jw-react-pagination';
 import { pageLoader } from './../config';
 
+/**
+ * This component render user borrowing history page
+ */
 class BorrowHistory extends Component {
   constructor() {
     super();
@@ -28,6 +31,9 @@ class BorrowHistory extends Component {
     });
   };
 
+  /**
+   * Makes a server request to get user borrowing history
+   */
   _getBorrowHistory(returned = null) {
     const access_token = this.props.auth.access_token;
     this.props.getBorrowHistory({ access_token, returned });
@@ -37,6 +43,9 @@ class BorrowHistory extends Component {
     this.setState({ pageOfItems });
   };
 
+  /**
+   * Protect the page from been assessed by users not logged in
+   */
   componentDidMount() {
     if (!this.props.auth.loggedIn) {
       browserHistory.push('/login');
@@ -97,7 +106,7 @@ class BorrowHistory extends Component {
                       <th>Title</th>
                       <th>Author</th>
                       <th>Borrow Date</th>
-                      <th>Return Date</th>
+                      <th>Expected / Return Date</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -131,6 +140,10 @@ class BorrowHistory extends Component {
     );
   }
 }
+
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth,
@@ -141,6 +154,9 @@ const mapDispatchToProps = dispatch => ({
   getBorrowHistory: data => dispatch(getBorrowHistory(data))
 });
 
+/**
+ * Validate props
+ */
 BorrowHistory.propTypes = {
   auth: PropTypes.object,
   history: PropTypes.object,

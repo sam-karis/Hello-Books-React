@@ -10,6 +10,10 @@ const initialState = {
   error: false,
   fetching: false
 };
+
+/**
+ * Borrowing history related Reducer
+ */
 export default (state = initialState, action) => {
   switch (action.type) {
     case BORROW_HISTORY_SUCCESS:

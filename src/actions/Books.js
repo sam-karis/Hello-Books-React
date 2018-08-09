@@ -2,6 +2,11 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { api_url } from './../config';
 
+/**
+ * Get all books function
+ * @returns{Object} - books
+ * @returns{String} - Message
+ */
 const getAllBooks = () => {
   return dispatch => {
     dispatch({'type': 'FETCHING_BOOKS'});
@@ -21,6 +26,12 @@ const getAllBooks = () => {
   };
 };
 
+/**
+ * Get single book function
+ * @param{Number} - book_id
+ * @returns{Object} - book
+ * @returns{String} - Message
+ */
 const getSingleBook = id => {
   const single_book_url = `${api_url}books/${id}`;
   return dispatch => {

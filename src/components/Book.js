@@ -5,6 +5,9 @@ import { Card, CardTitle, CardText, CardBody, CardFooter } from 'reactstrap';
 import { getSingleBook } from '../actions/Books';
 import PropTypes from 'prop-types';
 
+/**
+ * This component render a book in all books page
+ */
 class Book extends Component {
   _getSingleBook = () => {
     const book_id = this.props.params.id;
@@ -32,6 +35,9 @@ class Book extends Component {
   }
 }
 
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth,
@@ -39,10 +45,14 @@ const mapStateToProps = state => {
     onebook: state.book
   };
 };
+
 const mapDispatchToProps = dispatch => ({
   getSingleBook: id => getSingleBook(dispatch, id)
 });
 
+/**
+ * Validate props
+ */
 Book.propTypes = {
   book: PropTypes.object,
   getSingleBook: PropTypes.func,

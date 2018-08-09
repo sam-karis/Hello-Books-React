@@ -3,6 +3,9 @@ import Header from './Navigation';
 import Footer from './Footer';
 import PropTypes from 'prop-types';
 
+/*
+* This component render header and footer in all pages.
+*/
 class Root extends Component {
   render() {
     return (

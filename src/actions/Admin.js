@@ -4,6 +4,11 @@ import swal from 'sweetalert';
 import { api_url, request_header } from './../config';
 import { logout } from '../actions/Logout';
 
+/**
+ * Add book function
+ * @param{Object} - book
+ * @returns{String} - Message
+ */
 export const addBook = data => {
   return dispatch => {
     const add_book_url = `${api_url}books`;
@@ -40,6 +45,12 @@ export const addBook = data => {
   };
 };
 
+/**
+ * Edit book function
+ * @param{Number} - book_id
+ * @param{Object} - book
+ * @returns{String} - Message
+ */
 export const editBook = data => {
   return dispatch => {
     const edit_book_url = `${api_url}books/${data.book_id}`;
@@ -72,6 +83,11 @@ export const editBook = data => {
   };
 };
 
+/**
+ * Delete book function
+ * @param{Number} - book_id
+ * @returns{Object} - book
+ */
 export const deleteBook = data => {
   return dispatch => {
     const delete_book_url = `${api_url}books/${data.book_id}`;

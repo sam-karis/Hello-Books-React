@@ -15,6 +15,9 @@ import {
 import { logout } from '../actions/Logout';
 import PropTypes from 'prop-types';
 
+/**
+ * This component render navigation bar
+ */
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,10 @@ class Header extends Component {
       isOpen: false
     };
   }
+
+  /**
+   * Makes a server request to logout a user
+   */
   _logout = e => {
     e.preventDefault();
     const email = this.props.auth.email;
@@ -75,7 +82,6 @@ class Header extends Component {
                       {this.props.auth.username}
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem>Profile</DropdownItem>
                       <DropdownItem onClick={this._logout}>Logout</DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
@@ -88,6 +94,10 @@ class Header extends Component {
     );
   }
 }
+
+/**
+ * Map store state to props
+ */
 const mapStateToProps = state => {
   return {
     auth: state.auth
@@ -98,6 +108,9 @@ const mapDispatchToProps = dispatch => ({
   logout: data => dispatch(logout(data))
 });
 
+/**
+ * Validate props
+ */
 Header.propTypes = {
   auth: PropTypes.object,
   logout: PropTypes.func
