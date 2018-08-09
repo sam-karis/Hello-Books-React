@@ -117,11 +117,15 @@ class BorrowHistory extends Component {
                         <td>{history.Author}</td>
                         <td>{history.time_borrowed}</td>
                         <td>{history.return_date}</td>
-                        <td>
-                          <Link to={`books/${history.book_id}`}>
-                            {history.returned ? 'Returned' : 'Not Returned'}
-                          </Link>
-                        </td>
+                        {!history.deleted ? (
+                          <td>
+                            <Link to={`books/${history.book_id}`}>
+                              {history.returned ? 'Returned' : 'Not Returned'}
+                            </Link>
+                          </td>
+                        ) : (
+                          <td>No longer available</td>
+                        )}
                       </tr>
                     ))}
                   </tbody>
