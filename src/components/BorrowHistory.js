@@ -106,7 +106,7 @@ class BorrowHistory extends Component {
                       <th>Title</th>
                       <th>Author</th>
                       <th>Borrow Date</th>
-                      <th>Expexted | Return Date</th>
+                      <th>Expected | Return Date</th>
                       <th>Status</th>
                     </tr>
                   </thead>
